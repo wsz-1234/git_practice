@@ -4,11 +4,145 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>我的自我介紹網站</title>
-    <!-- CSS 可以在這裡連結 -->
-    <link rel="stylesheet" href="style.css">
+    <!-- Google 字體 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&family=Roboto:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            line-height: 1.6;
+            background-color: #F0F0F0;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        header h1 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+        }
+
+        /* Section */
+        section {
+            background-color: white;
+            margin: 20px auto;
+            padding: 40px 20px;
+            max-width: 900px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s, opacity 1s;
+            opacity: 0;
+        }
+
+        section.visible {
+            opacity: 1;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Skills */
+        #skills ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        #skills li {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        #skills li:hover {
+            transform: scale(1.1);
+            background-color: #388E3C;
+        }
+
+        /* Portfolio */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .portfolio-item {
+            background-color: #fafafa;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            display: block;
+        }
+
+        .portfolio-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Links */
+        a {
+            color: #4CAF50;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #388E3C;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+            margin-top: 40px;
+        }
+
+        /* 響應式 */
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            section {
+                padding: 20px 10px;
+            }
+            #skills ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- 標題 -->
+    <!-- Header -->
     <header>
         <h1>你好，我是張三</h1>
         <p>前端開發者 & 網頁設計師</p>
@@ -34,19 +168,48 @@
     <!-- 作品集 -->
     <section id="portfolio">
         <h2>作品集</h2>
-        <p>這裡可以放一些你的作品圖片或專案連結。</p>
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <img src="https://via.placeholder.com/300x200" alt="作品1">
+                <p>作品1描述</p>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://via.placeholder.com/300x200" alt="作品2">
+                <p>作品2描述</p>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://via.placeholder.com/300x200" alt="作品3">
+                <p>作品3描述</p>
+            </div>
+        </div>
     </section>
 
     <!-- 聯絡資訊 -->
     <section id="contact">
         <h2>聯絡我</h2>
-        <p>Email: example@email.com</p>
+        <p>Email: <a href="mailto:example@email.com">example@email.com</a></p>
         <p>LinkedIn: <a href="#">連結</a></p>
     </section>
 
-    <!-- 頁尾 -->
+    <!-- Footer -->
     <footer>
         <p>&copy; 2025 張三的自我介紹網站</p>
     </footer>
+
+    <script>
+        // 簡單滾動淡入動畫
+        const sections = document.querySelectorAll("section");
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
 </body>
 </html>
